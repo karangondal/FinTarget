@@ -1,25 +1,16 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import useWebSocket from './hooks/useWebSocket'; // Adjust path as necessary
+import ChartComponent from './components/ChartComponent'; // Adjust path as necessary
 
-function App() {
+const App = () => {
+  const { data: candleData } = useWebSocket('wss://stream.binance.com:9443/ws/ethusdt@kline_1m');
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Binance Market Data App</h1>
+      <ChartComponent candleData={candleData} />
     </div>
   );
-}
+};
 
 export default App;
